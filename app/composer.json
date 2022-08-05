@@ -1,0 +1,27 @@
+{
+  "name": "uladzimir/demo_blog",
+  "description": "The Demo Blog.",
+  "keywords": ["php", "blog"],
+  "license": "MIT",
+  "type": "project",
+  "require": {
+    "php": ">=8.0.2",
+    "ext-pdo": "*"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "extra": {
+  },
+  "scripts": {
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}
