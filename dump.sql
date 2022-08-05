@@ -1,0 +1,38 @@
+SET foreign_key_checks = 0;
+
+DROP TABLE IF EXISTS users;
+CREATE TABLE IF NOT EXISTS users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT email_unique UNIQUE (email)
+)  ENGINE=INNODB;
+
+INSERT INTO users (user_name, email, password)
+VALUES ('admin', 'admin@test.io', '1111'), ('Bob', 'bob@test.io','bob22222'), ('Alan', 'alan@test.io', 'alan3333');
+
+DROP TABLE IF EXISTS articles;
+CREATE TABLE IF NOT EXISTS articles (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(1000) NOT NULL,
+    img_url TEXT NOT NULL,
+    content TEXT NOT NULL,
+    user_id INT UNSIGNED NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON UPDATE RESTRICT ON DELETE CASCADE
+)  ENGINE=INNODB;
+
+DROP TABLE IF EXISTS comments;
+CREATE TABLE IF NOT EXISTS comments (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    comment TEXT NOT NULL,
+    article_id INT UNSIGNED NOT NULL,
+    user_id INT UNSIGNED NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (article_id) REFERENCES articles (id) ON UPDATE RESTRICT ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON UPDATE RESTRICT ON DELETE CASCADE
+)  ENGINE=INNODB;
+
+SET foreign_key_checks = 1;

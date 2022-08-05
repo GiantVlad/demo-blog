@@ -1,0 +1,3 @@
+- create the .local_data folder
+- create .env file from .env.example
+- bin/sqldump.sh to populate DB
